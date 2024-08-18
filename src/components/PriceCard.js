@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Button from "./UI/Button";
 import { useRouter } from "next/navigation";
@@ -5,11 +6,10 @@ import { convertUSDtoINR } from "@/lib/utils";
 
 const PriceCard = ({ price, productCount, handleAddCoupon }) => {
   const router = useRouter();
-  const handlePlaceOrder = () => {
-    setTimeout(() => {
-      router.push("/orderconfirmed");
-    }, 3000);
+  const handlePlaceOrder = async () => {
+    router.push("/orderconfirmed");
   };
+
   const convertPrice = convertUSDtoINR(price);
   return (
     <div className="flex flex-col gap-4 grow pb-10 pt-4">
@@ -37,9 +37,7 @@ const PriceCard = ({ price, productCount, handleAddCoupon }) => {
       <p className="border border-b-gray-200"></p>
       <div className="flex justify-between">
         <p>Total Amount</p>
-        <p>
-          <span>Rs.</span>total amount
-        </p>
+        <p className="font-semibold text-lg">₹{convertPrice}</p>
       </div>
       <Button type="button" intent="filled" onClick={handlePlaceOrder}>
         Place Order
