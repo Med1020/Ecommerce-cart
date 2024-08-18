@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "./UI/Button";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { convertUSDtoINR } from "@/lib/utils";
 
 const PriceCard = ({ price, productCount, handleAddCoupon }) => {
   const router = useRouter();
@@ -9,6 +10,7 @@ const PriceCard = ({ price, productCount, handleAddCoupon }) => {
       router.push("/orderconfirmed");
     }, 3000);
   };
+  const convertPrice = convertUSDtoINR(price);
   return (
     <div className="flex flex-col gap-4 grow pb-10 pt-4">
       <header>
@@ -16,7 +18,7 @@ const PriceCard = ({ price, productCount, handleAddCoupon }) => {
       </header>
       <div className="flex justify-between">
         <p>Total MRP</p>
-        <p>$ {price}</p>
+        <p>₹ {convertPrice}</p>
       </div>
       <div className="flex justify-between">
         <p>Discount on MRP</p>

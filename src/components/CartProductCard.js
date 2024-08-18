@@ -7,6 +7,7 @@ import { cartContext } from "../ContextProvider/CartProvider";
 import CouponModal from "./CouponModal";
 import { Minus, Plus, X } from "lucide-react";
 import PriceCard from "./PriceCard";
+import { convertUSDtoINR } from "@/lib/utils";
 
 const CartProductCard = () => {
   const { state, dispatch } = useContext(cartContext);
@@ -57,6 +58,7 @@ const CartProductCard = () => {
             <div className="grow mr-8 md:overflow-y-scroll no-scrollbar">
               {products.map(({ product: prod, quantity }) => {
                 const { title, image, price, id, rating, category } = prod;
+                const convertedPrice = convertUSDtoINR(price);
                 return (
                   <div
                     className="w-full flex flex-row mb-4 p-2 md:p-4 justify-between border-b border-gray-200"
@@ -75,7 +77,7 @@ const CartProductCard = () => {
                         <p className="text-ellipsis text-wrap text-sm">
                           {title}
                         </p>
-                        <p className="font-semibold">₹{price}</p>
+                        <p className="font-semibold">₹{convertedPrice}</p>
                         <div className="flex">
                           <p>Quantity:</p>
                           <button
